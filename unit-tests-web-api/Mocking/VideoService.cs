@@ -8,13 +8,13 @@ public class VideoService
     private IVideoRepository _repository;
 
     //injecting with properties
-    public IFileReader FileReader { get; set; }
-
-    public VideoService()
-    {
-        FileReader = new FileReader();
-    }
-
+    //public IFileReader FileReader { get; set; }
+    // public VideoService()
+    // {
+    //     FileReader = new FileReader();
+    // }
+    
+    //injecting with constructor
     public VideoService(IFileReader fileReader = null, IVideoRepository repository = null)
     {
         _fileReader = fileReader ?? new FileReader();
@@ -23,7 +23,11 @@ public class VideoService
     
     public string ReadVideoTitle()
     {
-        var str = FileReader.Read("video.txt");
+        //injecting with props
+        // var str = FileReader.Read("video.txt");
+        
+        //injecting with constructor
+        var str = _fileReader.Read("video.txt");
         var video = JsonConvert.DeserializeObject<Video>(str);
         if (video == null)
             return "Error parsing the video.";
