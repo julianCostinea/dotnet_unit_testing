@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace unit_tests_web_api.Mocking;
 
@@ -18,7 +19,7 @@ public class VideoService
     public VideoService(IFileReader fileReader = null, IVideoRepository repository = null)
     {
         _fileReader = fileReader ?? new FileReader();
-        // _repository = repository ?? new VideoRepository();
+        _repository = repository ?? new VideoRepository();
     }
     
     public string ReadVideoTitle()
@@ -63,11 +64,11 @@ public class Video
     public bool IsProcessed { get; set; }
 }
 
-// public class VideoContext : DbContext, IDisposable
-// {
-//     public DbSet<Video> Videos { get; set; }
-//     public void Dispose()
-//     {
-//         throw new NotImplementedException();
-//     }
-// }
+public class VideoContext : DbContext, IDisposable
+{
+    public DbSet<Video> Videos { get; set; }
+    public void Dispose()
+    {
+        throw new NotImplementedException();
+    }
+}
