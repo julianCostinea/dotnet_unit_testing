@@ -27,7 +27,7 @@ public class HousekeeperService
 
         foreach (var housekeeper in housekeepers)
         {
-            if (housekeeper.Email == null)
+            if (String.IsNullOrWhiteSpace(housekeeper.Email))
                 continue;
 
             var statementFilename =
